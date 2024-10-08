@@ -1,7 +1,7 @@
 class LoginController {
   async render(req, res, next) {
     try {
-      res.render("login.ejs");
+      res.render("login.ejs", { message: "" });
     } catch (error) {
       next(error);
     }

@@ -7,12 +7,14 @@ const { CustomError } = require("./lib/customError");
 const { ResData } = require("./lib/resData");
 const { router } = require("./modules/module.routes");
 const renderRoutes = require("./modules/renders/render.routes");
+const fileUpload = require("express-fileupload");
 
 const app = express();
 
 app.use(cors());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
+app.use(fileUpload());
 
 app.set("view engine", "ejs");
 app.set("views", join(__dirname, "./views"));
@@ -21,6 +23,16 @@ app.use(express.static(join(__dirname, "./public")));
 
 app.use("/api", router);
 app.use("/", renderRoutes.router);
+
+// app.post("/avatar", (req, res, next) => {
+//   try {
+//     console.log(req.files.ok);
+
+//     res.redirect("/home");
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 app.use((req, res, next) => {
   try {

@@ -31,7 +31,7 @@ class AuthController {
       res.cookie("token", userData.data.token);
       res.redirect("/home");
     } catch (error) {
-      next(error);
+      res.render("login.ejs", { message: error.message });
     }
   }
 
